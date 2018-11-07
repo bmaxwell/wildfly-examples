@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee       http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd" version="2.1">
+  <enterprise-beans>
+    <session>
+      <ejb-name>EjbAuthenticator</ejb-name>
+      <local-home>com.jboss.examples.loginmodule.ejb.EjbAuthenticatorLocalHome</local-home>
+      <local>com.jboss.examples.loginmodule.ejb.EjbAuthenticatorLocal</local>
+      <home>com.jboss.examples.loginmodule.ejb.EjbAuthenticatorRemoteHome</home>
+      <remote>com.jboss.examples.loginmodule.ejb.EjbAuthenticatorRemote</remote>
+      <ejb-class>com.jboss.examples.loginmodule.ejb.EjbAuthenticatorBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <method-permission>
+      <unchecked/>
+      <method>
+        <ejb-name>EjbAuthenticator</ejb-name>
+        <method-name>create</method-name>
+      </method>
+      <method>
+        <ejb-name>EjbAuthenticator</ejb-name>
+        <method-name>remove</method-name>
+      </method>
+      <method>
+        <ejb-name>EjbAuthenticator</ejb-name>
+        <method-name>login</method-name>
+      </method>
+    </method-permission>
+  </assembly-descriptor>
+</ejb-jar>
