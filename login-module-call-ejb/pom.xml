@@ -15,79 +15,70 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jboss.examples.loginmodule</groupId>
-    <artifactId>ejb-login-module</artifactId>
- 		<version>1.0</version>
-    <packaging>pom</packaging>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-		<properties>
-<version.jar.plugin>3.0.2</version.jar.plugin>
-<version.ear.plugin>2.10.1</version.ear.plugin>
-<version.ejb.plugin>2.5.1</version.ejb.plugin>
-
-		    <!-- EAP component version management BOM -->
-        <version.server.bom>7.1.0.GA</version.server.bom>
-        <version.jboss.spec.javaee.7.0>1.1.0.Final-redhat-3</version.jboss.spec.javaee.7.0>
-        <version.jaxws-tools-maven-plugin>1.2.0.Final</version.jaxws-tools-maven-plugin>
-		</properties>
-
-    <modules>
-        <module>api</module>
-        <module>ejb</module>
-        <module>ear</module>
-<!--
-        <module>login-module</module>
--->
-    </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- Define the version of the EJB jar so that we don't need
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.jboss.examples.loginmodule</groupId>
+  <artifactId>ejb-login-module</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <version.jar.plugin>3.0.2</version.jar.plugin>
+    <version.ear.plugin>2.10.1</version.ear.plugin>
+    <version.ejb.plugin>2.5.1</version.ejb.plugin>
+    <!-- EAP component version management BOM -->
+    <version.server.bom>7.1.0.GA</version.server.bom>
+    <version.jboss.spec.javaee.7.0>1.1.0.Final-redhat-3</version.jboss.spec.javaee.7.0>
+    <version.jaxws-tools-maven-plugin>1.2.0.Final</version.jaxws-tools-maven-plugin>
+  </properties>
+  <modules>
+    <module>api</module>
+    <module>ejb</module>
+    <module>ear</module>
+    <module>login-module</module>
+    <module>test-ejb</module>
+    <module>test-client</module>
+  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <!-- Define the version of the EJB jar so that we don't need
                 to repeat ourselves in every module -->
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>${project.artifactId}-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>${project.artifactId}-ejb</artifactId>
-                <version>${project.version}</version>
-                <type>ejb</type>
-            </dependency>
-
-            <!-- Define the version of the WAR so that we don't need to repeat
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}-ejb</artifactId>
+        <version>${project.version}</version>
+        <type>ejb</type>
+      </dependency>
+      <!-- Define the version of the WAR so that we don't need to repeat
                 ourselves in every module -->
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>${project.artifactId}-login-module</artifactId>
-                <version>${project.version}</version>
-                <type>jar</type>
-                <scope>compile</scope>
-            </dependency>
-
-
-            <dependency>
-                <groupId>org.jboss.bom</groupId>
-                <artifactId>jboss-eap-javaee7-with-tools</artifactId>
-                <version>${version.server.bom}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-<!--
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}-login-module</artifactId>
+        <version>${project.version}</version>
+        <type>jar</type>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.bom</groupId>
+        <artifactId>jboss-eap-javaee7-with-tools</artifactId>
+        <version>${version.server.bom}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!--
             <dependency>
                 <groupId>org.jboss.spec</groupId>
                 <artifactId>jboss-javaee-7.0</artifactId>
@@ -113,55 +104,53 @@
                 <scope>provided</scope>
             </dependency>
 -->
-        </dependencies>
-    </dependencyManagement>
-
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.bom</groupId>
-                <artifactId>eap-runtime-artifacts</artifactId>
-                <version>${version.server.bom}</version>
-                <type>pom</type>
-                <scope>compile</scope>
-            </dependency>
-
-           <dependency>
-<groupId>org.jboss.spec</groupId>
-<artifactId>jboss-javaee-7.0</artifactId>
-<version>1.1.0.Final-redhat-4</version>
-                <type>pom</type>
-                <scope>provided</scope>
-            </dependency>
-
-           <dependency>
-<groupId>org.jboss.logging</groupId>
-<artifactId>jboss-logging</artifactId>
-                <scope>provided</scope>
-           </dependency>
-
-           <dependency>
-<groupId>org.picketbox</groupId>
-<artifactId>picketbox</artifactId>
-<version>4.1.7.Final-redhat-1</version>
-                <scope>provided</scope>
-           </dependency>
-
-
-
-        </dependencies>
-    <build>
-        <plugins>
-            <!-- The WildFly plug-in deploys your ear to a local JBoss EAP container. 
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.jboss.bom</groupId>
+      <artifactId>eap-runtime-artifacts</artifactId>
+      <version>${version.server.bom}</version>
+      <type>pom</type>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.spec</groupId>
+      <artifactId>jboss-javaee-7.0</artifactId>
+      <version>1.1.0.Final-redhat-4</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.picketbox</groupId>
+      <artifactId>picketbox</artifactId>
+      <version>4.1.7.Final-redhat-1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.ejb3</groupId>
+      <artifactId>jboss-ejb3-ext-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <!-- The WildFly plug-in deploys your ear to a local JBoss EAP container. 
                 Due to Maven's lack of intelligence with EARs we need to configure
                 the WildFly Maven plug-in to skip deployment for all modules. We then enable
                 it specifically in the ear module. -->
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+      <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

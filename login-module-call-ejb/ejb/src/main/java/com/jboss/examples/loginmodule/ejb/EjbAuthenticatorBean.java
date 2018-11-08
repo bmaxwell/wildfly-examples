@@ -3,7 +3,6 @@
  */
 package com.jboss.examples.loginmodule.ejb;
 
-import java.rmi.RemoteException;
 import java.security.Principal;
 
 import javax.ejb.EJBException;
@@ -29,23 +28,23 @@ public class EjbAuthenticatorBean implements SessionBean, EjbAuthenticator {
 	}
 
 	public Principal login(String principalName) {
-		log.infof("returning SimplePrincipal(%s", principalName);
+		log.infof("returning SimplePrincipal(%s)", principalName);
 		return new SimplePrincipal(principalName);		
 	}
 
-	public void ejbActivate() throws EJBException, RemoteException {
+	public void ejbActivate() throws EJBException {
 		log.info("activate");		
 	}
 
-	public void ejbPassivate() throws EJBException, RemoteException {
+	public void ejbPassivate() throws EJBException {
 		log.info("passivate");		
 	}
 
-	public void ejbRemove() throws EJBException, RemoteException {
+	public void ejbRemove() throws EJBException {
 		log.info("remove");
 	}
 
-	public void setSessionContext(SessionContext ctx) throws EJBException, RemoteException {
+	public void setSessionContext(SessionContext ctx) throws EJBException {
 		log.info("setSessionContext");
 		this.ctx = ctx;
 	}
