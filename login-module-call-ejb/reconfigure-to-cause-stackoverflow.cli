@@ -1,0 +1,3 @@
+embed-server
+/subsystem=ejb3:write-attribute(name=default-security-domain,value=ejb)
+stop-embedded-server

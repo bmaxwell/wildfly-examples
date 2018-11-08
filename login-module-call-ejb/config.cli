@@ -1,0 +1,16 @@
+embed-server
+
+/subsystem=logging/logger=org.jboss.security:add(level=TRACE)
+/subsystem=logging/logger=org.wildfly.security:add(level=TRACE)
+/subsystem=logging/logger=org.jboss.remoting:add(level=TRACE)
+
+/core-service=management/security-realm=ApplicationRealm/authentication=local:remove()
+
+/subsystem=security/security-domain=ejb:add(cache-type=default)
+/subsystem=security/security-domain=ejb/authentication=classic:add(login-modules=[{code=com.jboss.examples.loginmodule.EjbLoginModule, module=com.jboss.examples.loginmodule,flag=required,module-options={ejbLookup=java:global/ejb-login-module/ejb-login-module-ejb/EjbAuthenticator!com.jboss.examples.loginmodule.ejb.EjbAuthenticatorRemoteHome}}])
+
+/core-service=management/security-realm=ejb-realm:add()
+/core-service=management/security-realm=ejb-realm/authentication=jaas:add(name=ejb)
+
+/subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=security-realm, value=ejb-realm)
+stop-embedded-server
